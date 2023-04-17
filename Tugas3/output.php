@@ -1,97 +1,71 @@
-<?
+<?php
     session_start();
-    if ($_SESSION['submit'] != true)
+
+    $name = '';
+    $sex = '';
+    $bp = '';
+    $bd = '';
+    $rel = '';
+    $add = '';
+
+    if (isset($_SESSION["name"]))
     {
-        $name = $_SESSION['name'] ?? '';
-        $sex = $_SESSION['sex'] ?? '';
-        $bp = $_SESSION['bp'] ?? '';
-        $bd = $_SESSION['bd'] ?? '';
-        $rel = $_SESSION['rel'] ?? '';
-        $add = $_SESSION['add'] ?? '';
+        $name = $_SESSION["name"] ?? '';
+        $sex = $_SESSION["sex"] ?? '';
+        $bp = $_SESSION["bp"] ?? '';
+        $bd = $_SESSION["bd"] ?? '';
+        $rel = $_SESSION["rel"] ?? '';
+        $add = $_SESSION["add"] ?? '';
+    }
+
+    if(isset($_POST['name']))
+    {
+        $name = $_POST['name'];
+        $sex = $_POST['sex'];
+        $bp = $_POST['bp'];
+        $bd = $_POST['bd'];
+        $rel = $_POST['rel'];
+        $add = $_POST['add'];
     }
 ?>
 <html lang="en">
 <head>
     <title>My Biodata</title>
-    <style>
-        *{
-            border-radius: 5px;
-        }
-        body{
-            font-family: sans-serif;
-            background-color: black;
-        }
-        .container {
-            width: 50%;
-            padding: 70px 70px 70px 50px;
-            margin-right: auto;
-            margin-left: auto;
-            align-content: center;
-            justify-content: center;
-            background-color: rgb(247,247, 251);
-            border-radius: 5%;
-        }
-        .title{
-            font-size: 55px;
-            font-weight: 600;
-            margin: auto;
-        }
-        .subtitle{
-            font-size: 20px;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-        .sz-20{
-            font-size: 20px;
-        }
-        .wdt100{
-            margin-top: 5px;
-            margin-bottom: 10px;
-            width: 100%;
-            box-sizing: content-box;
-            padding: 10px;
-            color: gray;
-            border: solid 1px gray;
-        }
-        .wdt100 :checked{
-            color: gray;
-
-        }
-        .sub{
-            width: 20%;
-            box-sizing: content-box;
-            padding: 10px 20px;
-            margin-top: 15px;
-            margin-left: 75%;
-            background-color: rgb(56, 161, 105);
-            color: white;
-            border: solid 1px gray;
-            font-size: 22px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="methods.js"></script>
 </head>
 <body>
-    
     <div class="container">
         <p class="title">MY BIOADATA</p>
         <p class="subtitle">Silahkan Lihat Data Diri Anda Di Bawah Ini.</p>
-        <div>
-            <p>Nama Lengkap:<?= $name ?></p>
+        <div class="successNotif">
+            <div id="header">
+                <h4>Data Kamu Berhasil Disimpan!</h4>
+                <button type="button" class="close" onclick="this.parentNode.parentNode.remove()">&times;</button>
+            </div>
+            <div>
+                <p class="mrg-0 pad-btm-10" id="msg">Data Berhasil Disimpan didalam cookies/session</p>
+            </div>
         </div>
-        <div>
-            <p>Jenis Kelamin:<?= $sex ?></p>
+        <div class="even">
+            <p>Nama Lengkap:    <?= $name ?></p>
         </div>
-        <div>
-            <p>Tempat Tanggal Lahir:<?= $bp ?>, <?= $bd ?></p>
+        <div class="odd">
+            <p>Jenis Kelamin:   <?= $sex ?></p>
         </div>
-        <div>
-            <p>Agama: <?= $rel ?></p>
+        <div class="even">
+            <p>Tempat Tanggal Lahir:    <?= $bp .", ". $bd ?></p>
         </div>
-        <div>
-            <p>Alamat: <?= $add ?></p>
+        <div class="odd">
+            <p>Agama:   <?= $rel ?></p>
         </div>
-          
+        <div class="even">
+            <p>Alamat:  <?= $add ?></p>
+        </div>
+        <div id="footer">
+            <button id="goBack" onclick="goBack()">Kembali</button>   
+        </div>
+
     </div>
-       
 </body>
 </html>
